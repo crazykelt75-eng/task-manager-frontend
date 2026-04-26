@@ -4,12 +4,12 @@ import { getTasks, updateTask, deleteTask } from "../services/api";
 
 function List() {
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  // load tasks when the page first opens
+  // need to load tasks when page opens, useEffect runs once
   useEffect(() => {
     // if no token, send them to login
     if (!localStorage.getItem("token")) {
@@ -23,33 +23,30 @@ function List() {
   async function loadTasks() {
     try {
       const data = await getTasks();
+      console.log("loaded tasks:", data);
       setTasks(data);
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }
 
   async function toggleDone(task) {
     try {
       await updateTask(task.id, { done: !task.done });
-      loadTasks();
+      loadTasks(); // reload after changing
     } catch (err) {
       setError(err.message);
     }
   }
 
   async function removeTask(id) {
-    try {
-      await deleteTask(id);
-      loadTasks();
-    } catch (err) {
-      setError(err.message);
-    }
+    await deleteTask(id);
+    loadTasks();
   }
 
-  if (loading) {
+  if (isLoading) {
     return <div className="container mt-4"><p>Loading tasks...</p></div>;
   }
 

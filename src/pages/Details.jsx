@@ -3,16 +3,18 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { getTask, updateTask, deleteTask } from "../services/api";
 
 function Details() {
+  // this took me a while to get working
+  // useParams grabs the id from the url
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [task, setTask] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const [editing, setEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
+  const [editTitle, setEditTitle] = useState("");
+  const [editDesc, setEditDesc] = useState("");
 
   const loadTask = useCallback(async () => {
     try {
@@ -21,7 +23,7 @@ function Details() {
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, [id]);
 
@@ -34,14 +36,14 @@ function Details() {
   }, [navigate, loadTask]);
 
   function startEditing() {
-    setNewTitle(task.title);
-    setNewDescription(task.description || "");
+    setEditTitle(task.title);
+    setEditDesc(task.description || "");
     setEditing(true);
   }
 
   async function saveChanges() {
     try {
-      await updateTask(task.id, { title: newTitle, description: newDescription });
+      await updateTask(task.id, { title: editTitle, description: editDesc });
       setEditing(false);
       loadTask();
     } catch (err) {
@@ -50,15 +52,11 @@ function Details() {
   }
 
   async function removeTask() {
-    try {
-      await deleteTask(task.id);
-      navigate("/list");
-    } catch (err) {
-      setError(err.message);
-    }
+    await deleteTask(task.id);
+    navigate("/list");
   }
   
-  if (loading) {
+  if (isLoading) {
     return <div className="container mt-4"><p>Loading...</p></div>;
   }
 
@@ -86,8 +84,8 @@ function Details() {
                 <input
                   type="text"
                   className="form-control"
-                  value={newTitle}
-                  onChange={(e) => setNewTitle(e.target.value)}
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -95,8 +93,8 @@ function Details() {
                 <textarea
                   className="form-control"
                   rows="3"
-                  value={newDescription}
-                  onChange={(e) => setNewDescription(e.target.value)}
+                  value={editDesc}
+                  onChange={(e) => setEditDesc(e.target.value)}
                 ></textarea>
               </div>
               <button onClick={saveChanges} className="btn btn-success me-2">Save</button>
@@ -124,4 +122,4 @@ function Details() {
   );
 }
 
-export default Details;
+export default Details

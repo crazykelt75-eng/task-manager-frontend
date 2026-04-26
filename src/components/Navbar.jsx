@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+// show different links if user is logged in or not
 function Navbar({ user, logout }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,7 +24,7 @@ function Navbar({ user, logout }) {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-function Home() {
+// home page - just a simple landing page with links to the main features
+export default function Home() {
   return (
     <div className="container mt-5">
       <h1>Task Manager</h1>
@@ -11,7 +12,5 @@ function Home() {
         <Link to="/add" className="btn btn-success" style={{ marginLeft: "10px" }}>Add Task</Link>
       </div>
     </div>
-  );
+  )
 }
-
-export default Home;

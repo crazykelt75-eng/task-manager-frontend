@@ -7,6 +7,7 @@ function AddTask() {
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
+  // navigate sends user to list page after saving
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,12 +24,8 @@ function AddTask() {
       return;
     }
 
-    try {
-      await createTask({ title, description });
-      navigate("/list");
-    } catch (err) {
-      setError(err.message);
-    }
+    await createTask({ title: title, description: description });
+    navigate("/list");
   }
 
   return (
@@ -64,5 +61,5 @@ function AddTask() {
   );
 }
 
-export default AddTask;
+export default AddTask
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"
 
 const API_URL = "https://task-manager-backend-lv2a.onrender.com";
 
@@ -11,7 +11,7 @@ function Register() {
 
   const navigate = useNavigate();
 
-  async function handleRegister(e) {
+  async function tryRegister(e) {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -22,7 +22,7 @@ function Register() {
     }
 
     try {
-      const res = await fetch(`${API_URL}/register`, {
+      const res = await fetch(API_URL + "/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
@@ -35,7 +35,7 @@ function Register() {
         return;
       }
 
-      setSuccess("Account created. Redirecting to login...");
+      setSuccess("Account created! Going to login...");
       setTimeout(() => navigate("/login"), 1500);
     } catch {
       setError("Could not connect to server");
@@ -45,7 +45,7 @@ function Register() {
   return (
     <div className="container mt-4" style={{ maxWidth: "400px" }}>
       <h1>Register</h1>
-      <form onSubmit={handleRegister} className="mt-3">
+      <form onSubmit={tryRegister} className="mt-3">
         <div className="mb-3">
           <label className="form-label">Username</label>
           <input
@@ -75,4 +75,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Register

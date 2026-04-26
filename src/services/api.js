@@ -1,28 +1,34 @@
+// i put all the api stuff here so i dont have to repeat it
+// got the idea from a youtube tutorial
+
 const API_URL = "https://task-manager-backend-lv2a.onrender.com";
 
 // helper that adds the auth token to every request
 function getHeaders() {
   const token = localStorage.getItem("token");
-  return {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`
+  const headers = {
+    "Content-Type": "application/json"
   };
+  if (token) {
+    headers["Authorization"] = "Bearer " + token;
+  }
+  return headers;
 }
 
 export async function getTasks() {
-  const res = await fetch(`${API_URL}/tasks`, { headers: getHeaders() });
+  const res = await fetch(API_URL + "/tasks", { headers: getHeaders() });
   if (!res.ok) throw new Error("Failed to load tasks");
   return res.json();
 }
 
 export async function getTask(id) {
-  const res = await fetch(`${API_URL}/tasks/${id}`, { headers: getHeaders() });
-  if (!res.ok) throw new Error("Failed to load task");
+  const res = await fetch(API_URL + "/tasks/" + id, { headers: getHeaders() });
+  if (!res.ok) throw new Error("Task not found");
   return res.json();
 }
 
 export async function createTask(task) {
-  const res = await fetch(`${API_URL}/tasks`, {
+  const res = await fetch(API_URL + "/tasks", {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify(task)
@@ -35,20 +41,20 @@ export async function createTask(task) {
 }
 
 export async function updateTask(id, updates) {
-  const res = await fetch(`${API_URL}/tasks/${id}`, {
+  const res = await fetch(API_URL + "/tasks/" + id, {
     method: "PUT",
     headers: getHeaders(),
     body: JSON.stringify(updates)
   });
-  if (!res.ok) throw new Error("Failed to update task");
+  if (!res.ok) throw new Error("Failed to update");
   return res.json();
 }
 
 export async function deleteTask(id) {
-  const res = await fetch(`${API_URL}/tasks/${id}`, {
+  const res = await fetch(API_URL + "/tasks/" + id, {
     method: "DELETE",
     headers: getHeaders()
   });
-  if (!res.ok) throw new Error("Failed to delete task");
+  if (!res.ok) throw new Error("Could not delete");
   return res.json();
 }

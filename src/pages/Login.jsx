@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from 'react-router-dom';
 
 const API_URL = "https://task-manager-backend-lv2a.onrender.com"; 
 
@@ -10,25 +10,26 @@ function Login({ setUser }) {
 
   const navigate = useNavigate();
 
-  async function handleLogin(e) {
+  async function doLogin(e) {
     e.preventDefault();
     setError("");
 
     try {
-      const res = await fetch(`${API_URL}/login`, {
+      const res = await fetch(API_URL + "/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       });
 
       const data = await res.json();
+      console.log("login response", data);
 
       if (!res.ok) {
         setError(data.error || "Login failed");
         return;
       }
 
-      // save token + username in browser so we stay logged in
+      // save token so user stays logged in
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
       setUser(data.username);
@@ -41,7 +42,7 @@ function Login({ setUser }) {
   return (
     <div className="container mt-4" style={{ maxWidth: "400px" }}>
       <h1>Login</h1>
-      <form onSubmit={handleLogin} className="mt-3">
+      <form onSubmit={doLogin} className="mt-3">
         <div className="mb-3">
           <label className="form-label">Username</label>
           <input
@@ -67,7 +68,7 @@ function Login({ setUser }) {
         No account? <Link to="/register">Register here</Link>
       </p>
     </div>
-  );
+  )
 }
 
 export default Login;

@@ -8,6 +8,7 @@ import AddTask from "./pages/AddTask";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+// this is where everything connects together
 function App() {
   // check if a user was already logged in (token saved before)
   const [user, setUser] = useState(localStorage.getItem("username"));
