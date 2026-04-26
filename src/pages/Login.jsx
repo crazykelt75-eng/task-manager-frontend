@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-const API_URL = "https://task-manager-backend-lv2a.onrender.com";
+const API_URL = "https://task-manager-backend-lv2a.onrender.com"; 
 
 function Login({ setUser }) {
   const [username, setUsername] = useState("");
