@@ -1,22 +1,11 @@
-/* override bootstrap primary color to green */
+/* green theme for the whole app */
+
 :root {
   --bs-primary: #16a34a;
   --bs-primary-rgb: 22, 163, 74;
   --bs-link-color: #16a34a;
   --bs-link-hover-color: #15803d;
-
-  --text: #374151;
-  --text-h: #111827;
-  --bg: #f0fdf4;
-  --border: #bbf7d0;
-  --accent: #16a34a;
-  --accent-bg: rgba(22, 163, 74, 0.1);
-  --accent-border: rgba(22, 163, 74, 0.5);
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  font: 18px/145% var(--sans);
-  color: var(--text);
-  background: var(--bg);
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -25,19 +14,23 @@ body {
   background-color: #f0fdf4;
 }
 
-/* make cards have a slight green tint on border */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
 .card {
   border-color: #bbf7d0 !important;
   box-shadow: 0 1px 4px rgba(22, 163, 74, 0.08);
 }
 
-/* green focus ring on form inputs */
+/* tried outline-success first but this looks cleaner */
 .form-control:focus {
   border-color: #16a34a;
   box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25);
 }
 
-/* fix btn-primary since bootstrap doesnt use css vars for bg in some versions */
+/* bootstrap doesnt always pick up the css variable so forcing it here */
 .btn-primary {
   background-color: #16a34a !important;
   border-color: #15803d !important;

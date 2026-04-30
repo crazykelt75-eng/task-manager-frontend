@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import List from "./pages/List";
-import Details from "./pages/Details";
-import AddTask from "./pages/AddTask";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import { useState } from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Home from "./pages/Home"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
+import List from "./pages/List"
+import AddTask from "./pages/AddTask"
+import Details from "./pages/Details"
 
-// this is where everything connects together
 function App() {
-  // check if a user was already logged in (token saved before)
-  const [user, setUser] = useState(localStorage.getItem("username"));
+  // keep track of who is logged in
+  // checks localstorage so it remembers between refreshes
+  const [user, setUser] = useState(localStorage.getItem("username"))
 
   function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    setUser(null);
+    localStorage.removeItem("token")
+    localStorage.removeItem("username")
+    setUser(null)
   }
 
   return (
@@ -27,11 +27,11 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/list" element={<List />} />
-        <Route path="/details/:id" element={<Details />} />
         <Route path="/add" element={<AddTask />} />
+        <Route path="/details/:id" element={<Details />} />
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
