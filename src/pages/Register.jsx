@@ -44,7 +44,7 @@ function Register() {
 
   return (
     <div className="container mt-4" style={{ maxWidth: "400px" }}>
-      <h1>Register</h1>
+      <h1 style={{ color: "#15803d" }}>Register</h1>
       <form onSubmit={tryRegister} className="mt-3">
         <div className="mb-3">
           <label className="form-label">Username</label>
@@ -66,7 +66,7 @@ function Register() {
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
         {success && <p style={{ color: "green" }}>{success}</p>}
-        <button type="submit" className="btn btn-primary">Create Account</button>
+        <button type="submit" className="btn btn-success">Create Account</button>
       </form>
       <p className="mt-3">
         Already have an account? <Link to="/login">Login here</Link>

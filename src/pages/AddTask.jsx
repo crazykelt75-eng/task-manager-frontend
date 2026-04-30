@@ -30,7 +30,7 @@ function AddTask() {
 
   return (
     <div className="container mt-4">
-      <h1>Add a New Task</h1>
+      <h1 style={{ color: "#15803d" }}>Add a New Task</h1>
 
       <form onSubmit={submitTask} className="mt-3">
         <div className="mb-3">
@@ -55,11 +55,10 @@ function AddTask() {
 
         {error && <p style={{ color: "red" }}>{error}</p>}
 
-        <button type="submit" className="btn btn-primary">Save Task</button>
+        <button type="submit" className="btn btn-success">Save Task</button>
       </form>
     </div>
   );
 }
 
 export default AddTask
-

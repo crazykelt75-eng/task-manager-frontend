@@ -65,14 +65,14 @@ function Details() {
       <div className="container mt-4">
         <h1>Task not found</h1>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <Link to="/list" className="btn btn-secondary mt-3">Back to list</Link>
+        <Link to="/list" className="btn btn-outline-success mt-3">Back to list</Link>
       </div>
     );
   }
 
   return (
     <div className="container mt-4">
-      <h1>Task Details</h1>
+      <h1 style={{ color: "#15803d" }}>Task Details</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <div className="card mt-3">
@@ -98,7 +98,7 @@ function Details() {
                 ></textarea>
               </div>
               <button onClick={saveChanges} className="btn btn-success me-2">Save</button>
-              <button onClick={() => setEditing(false)} className="btn btn-secondary">Cancel</button>
+              <button onClick={() => setEditing(false)} className="btn btn-outline-secondary">Cancel</button>
             </div>
           ) : (
             <div>
@@ -110,14 +110,14 @@ function Details() {
                 <strong>Status: </strong>
                 {task.done ? "Completed" : "Not done yet"}
               </p>
-              <button onClick={startEditing} className="btn btn-warning me-2">Edit</button>
-              <button onClick={removeTask} className="btn btn-danger">Delete</button>
+              <button onClick={startEditing} className="btn btn-outline-success me-2">Edit</button>
+              <button onClick={removeTask} className="btn btn-outline-danger">Delete</button>
             </div>
           )}
         </div>
       </div>
 
-      <Link to="/list" className="btn btn-secondary mt-3">Back to list</Link>
+      <Link to="/list" className="btn btn-outline-success mt-3">Back to list</Link>
     </div>
   );
 }

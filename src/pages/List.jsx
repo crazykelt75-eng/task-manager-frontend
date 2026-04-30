@@ -9,9 +9,8 @@ function List() {
 
   const navigate = useNavigate();
 
-  // need to load tasks when page opens, useEffect runs once
+  // load tasks when the page opens, send to login if no token
   useEffect(() => {
-    // if no token, send them to login
     if (!localStorage.getItem("token")) {
       navigate("/login");
       return;
@@ -35,7 +34,7 @@ function List() {
   async function toggleDone(task) {
     try {
       await updateTask(task.id, { done: !task.done });
-      loadTasks(); // reload after changing
+      loadTasks();
     } catch (err) {
       setError(err.message);
     }
@@ -52,7 +51,7 @@ function List() {
 
   return (
     <div className="container mt-4">
-      <h1>My Tasks</h1>
+      <h1 style={{ color: "#15803d" }}>My Tasks</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {tasks.length === 0 ? (
@@ -67,19 +66,19 @@ function List() {
                     type="checkbox"
                     checked={task.done === 1 || task.done === true}
                     onChange={() => toggleDone(task)}
-                    style={{ marginRight: "10px" }}
+                    style={{ marginRight: "10px", accentColor: "#16a34a" }}
                   />
                   <span style={{ textDecoration: task.done ? "line-through" : "none" }}>
                     {task.title}
                   </span>
                 </div>
                 <div>
-                  <Link to={`/details/${task.id}`} className="btn btn-sm btn-info me-2">
+                  <Link to={`/details/${task.id}`} className="btn btn-sm btn-success me-2">
                     View
                   </Link>
                   <button
                     onClick={() => removeTask(task.id)}
-                    className="btn btn-sm btn-danger"
+                    className="btn btn-sm btn-outline-danger"
                   >
                     Delete
                   </button>

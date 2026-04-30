@@ -41,7 +41,7 @@ function Login({ setUser }) {
 
   return (
     <div className="container mt-4" style={{ maxWidth: "400px" }}>
-      <h1>Login</h1>
+      <h1 style={{ color: "#15803d" }}>Login</h1>
       <form onSubmit={doLogin} className="mt-3">
         <div className="mb-3">
           <label className="form-label">Username</label>
@@ -62,7 +62,7 @@ function Login({ setUser }) {
           />
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit" className="btn btn-primary">Login</button>
+        <button type="submit" className="btn btn-success">Login</button>
       </form>
       <p className="mt-3">
         No account? <Link to="/register">Register here</Link>
